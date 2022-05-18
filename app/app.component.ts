@@ -299,7 +299,7 @@ export class AppComponent implements OnInit {
         if (item.numberPage === this.currentPage) {
           this.selectedPage.selected = false;
           this.selectedPage = item;
-          item.selected = true;
+          this.selectedPage.selected = true;
           this.users = item.user;
 
           this.nextPage++;
@@ -336,7 +336,7 @@ export class AppComponent implements OnInit {
         if (item.numberPage === this.currentPage) {
           this.selectedPage.selected = false;
           this.selectedPage = item;
-          item.selected = true;
+          this.selectedPage.selected = true;
           this.users = item.user;
 
           this.nextPage--;
@@ -355,7 +355,7 @@ export class AppComponent implements OnInit {
           console.warn(item);
           this.selectedPage.selected = false;
           this.selectedPage = item;
-          item.selected = true;
+          this.selectedPage.selected = true;
           this.users = item.user;
         }
       });
@@ -380,7 +380,16 @@ export class AppComponent implements OnInit {
   }
 
   selectPage(selectPage: number) {
-    console.warn('click', selectPage);
-    console.warn('this.selectedPage', this.selectedPage);
+    this.currentPage = selectPage;
+    this.responsePage.filter((item) => {
+      if (item.numberPage === selectPage) {
+        this.selectedPage.selected = false;
+        this.selectedPage = item;
+        this.selectedPage.selected = true;
+        this.users = item.user;
+        this.nextPage = this.currentPage + 1;
+        this.previousPage = this.currentPage - 1;
+      }
+    });
   }
 }
