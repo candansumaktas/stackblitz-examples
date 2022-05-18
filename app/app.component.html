@@ -1,0 +1,104 @@
+<nav aria-label="Page navigation example">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">name</th>
+        <th scope="col">surname</th>
+        <th scope="col">birthday</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td *ngFor="let user of users">
+          {{ user.name }}
+        </td>
+      </tr>
+      <tr>
+        <td *ngFor="let user of users">
+          <div>{{ user.surname }}</div>
+        </td>
+      </tr>
+      <tr>
+        <td *ngFor="let user of users">
+          <div>{{ user.birthday }}</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <button
+        #previousButton
+        id="previousButton"
+        for="pageItem"
+        type="button"
+        class="btn btn-light page-link"
+        (click)="defaultSelected()"
+      >
+        Fisrt
+      </button>
+    </li>
+
+    <li class="page-item">
+      <button
+        #previousButton
+        id="previousButton"
+        for="pageItem"
+        type="button"
+        class="btn btn-light page-link"
+        (click)="previous()"
+      >
+        Previous
+      </button>
+    </li>
+
+    <li
+      #pageItem
+      id="pageItem"
+      class="page-item"
+      [ngClass]="selectedPage.numberPage - 1 === 0 ? 'd-none' : ''"
+      aria-current="page"
+    >
+      <span class="page-link">{{ selectedPage.numberPage - 1 }}</span>
+    </li>
+    <li #pageItem id="pageItem" class="page-item active" aria-current="page">
+      <span class="page-link">{{ selectedPage.numberPage }}</span>
+    </li>
+    <li
+      #pageItem
+      id="pageItem"
+      class="page-item"
+      aria-current="page"
+      [ngClass]="selectedPage.numberPage + 1 > pageSize ? 'd-none' : ''"
+    >
+      <span class="page-link">{{ selectedPage.numberPage + 1 }}</span>
+    </li>
+
+    <li class="page-item">
+      <button
+        #nextButton
+        for="pageItem"
+        id="nextButton"
+        type="button"
+        class="btn btn-light page-link"
+        (click)="next()"
+      >
+        Next
+      </button>
+    </li>
+    <li class="page-item">
+      <button
+        #previousButton
+        id="previousButton"
+        for="pageItem"
+        type="button"
+        class="btn btn-light page-link"
+        [disabled]="currentPage === 10"
+        (click)="last()"
+      >
+        Last
+      </button>
+    </li>
+  </ul>
+</nav>
