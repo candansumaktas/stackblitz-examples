@@ -2,23 +2,29 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">name</th>
-        <th scope="col">surname</th>
-        <th scope="col">birthday</th>
+        <th scope="col">kullanıcılar</th>
       </tr>
     </thead>
     <tbody>
       <tr>
+        <td>Adı</td>
+        <td></td>
         <td *ngFor="let user of users">
           {{ user.name }}
         </td>
       </tr>
       <tr>
+        <td>Soyadı</td>
+        <td></td>
+
         <td *ngFor="let user of users">
           <div>{{ user.surname }}</div>
         </td>
       </tr>
       <tr>
+        <td>Doğum Yılı</td>
+        <td></td>
+
         <td *ngFor="let user of users">
           <div>{{ user.birthday }}</div>
         </td>
