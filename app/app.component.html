@@ -2,34 +2,26 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">kullanıcılar</th>
+        <th>UserLine</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Birthday</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Adı</td>
-        <td></td>
-        <td *ngFor="let user of users">
+      <tr *ngFor="let user of users">
+        <th>{{ user.userLine }}</th>
+        <td>
           {{ user.name }}
         </td>
-      </tr>
-      <tr>
-        <td>Soyadı</td>
-        <td></td>
-
-        <td *ngFor="let user of users">
-          <div>{{ user.surname }}</div>
-        </td>
-      </tr>
-      <tr>
-        <td>Doğum Yılı</td>
-        <td></td>
-
-        <td *ngFor="let user of users">
-          <div>{{ user.birthday }}</div>
+        <td>{{ user.surname }}</td>
+        <td>
+          {{ user.birthday }}
         </td>
       </tr>
     </tbody>
+
+    <tbody></tbody>
   </table>
 
   <ul class="pagination justify-content-center">
@@ -53,6 +45,7 @@
         for="pageItem"
         type="button"
         class="btn btn-light page-link"
+        [disabled]="currentPage === 1"
         (click)="previous()"
       >
         Previous
@@ -66,11 +59,20 @@
       [ngClass]="selectedPage.numberPage - 1 === 0 ? 'd-none' : ''"
       aria-current="page"
     >
-      <span class="page-link">{{ selectedPage.numberPage - 1 }}</span>
+      <button
+        class="page-link"
+        (click)="selectPage(selectedPage.numberPage - 1)"
+      >
+        {{ selectedPage.numberPage - 1 }}
+      </button>
     </li>
+
     <li #pageItem id="pageItem" class="page-item active" aria-current="page">
-      <span class="page-link">{{ selectedPage.numberPage }}</span>
+      <button class="page-link" (click)="selectPage(selectedPage.numberPage)">
+        {{ selectedPage.numberPage }}
+      </button>
     </li>
+
     <li
       #pageItem
       id="pageItem"
@@ -78,7 +80,12 @@
       aria-current="page"
       [ngClass]="selectedPage.numberPage + 1 > pageSize ? 'd-none' : ''"
     >
-      <span class="page-link">{{ selectedPage.numberPage + 1 }}</span>
+      <button
+        class="page-link"
+        (click)="selectPage(selectedPage.numberPage + 1)"
+      >
+        {{ selectedPage.numberPage + 1 }}
+      </button>
     </li>
 
     <li class="page-item">
@@ -100,7 +107,7 @@
         for="pageItem"
         type="button"
         class="btn btn-light page-link"
-        [disabled]="currentPage === 10"
+        [disabled]="currentPage === pageSize"
         (click)="last()"
       >
         Last

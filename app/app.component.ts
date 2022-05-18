@@ -378,4 +378,9 @@ export class AppComponent implements OnInit {
 
     console.warn(this.selectedPage);
   }
+
+  selectPage(selectPage: number) {
+    console.warn('click', selectPage);
+    console.warn('this.selectedPage', this.selectedPage);
+  }
 }
